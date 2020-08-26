@@ -1,0 +1,27 @@
+{
+  "name": "platziverse-db",
+  "version": "1.0.0",
+  "description": "A Simple IoT Plataform - DB Module",
+  "main": "index.js",
+  "scripts": {
+    "lint": "standard --fix"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Ajohanson1406/Platziverse.git"
+  },
+  "author": "Albert Johanson",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Ajohanson1406/Platziverse/issues"
+  },
+  "homepage": "https://github.com/Ajohanson1406/Platziverse#readme",
+  "devDependencies": {
+    "standard": "^14.3.4"
+  },
+  "dependencies": {
+    "pg": "^8.3.2",
+    "pg-hstore": "^2.3.3",
+    "sequelize": "^6.3.4"
+  }
+}
