@@ -4,9 +4,9 @@
   "description": "A Simple IoT Plataform - DB Module",
   "main": "index.js",
   "scripts": {
-    "test": "SET DEBUG=platziverse:* && ava tests/* --verbose",
+    "test": "nyc --reporter=lcov --report-dir=coverage/ ava tests/* --verbose && start coverage/lcov-report/index.html",
     "lint": "standard --fix",
-    "setup": "SET DEBUG=platziverse:* && node setup.js"
+    "setup": "set DEBUG=platziverse:* && node setup.js"
   },
   "repository": {
     "type": "git",
@@ -20,6 +20,8 @@
   "homepage": "https://github.com/Ajohanson1406/Platziverse#readme",
   "devDependencies": {
     "ava": "^3.12.1",
+    "nyc": "^15.1.0",
+    "proxyquire": "^2.1.3",
     "sqlite3": "^5.0.0",
     "standard": "^14.3.4"
   },
@@ -30,6 +32,7 @@
     "inquirer": "^7.3.3",
     "pg": "^8.3.2",
     "pg-hstore": "^2.3.3",
-    "sequelize": "^6.3.4"
+    "sequelize": "^6.3.4",
+    "sinon": "^9.0.3"
   }
 }
