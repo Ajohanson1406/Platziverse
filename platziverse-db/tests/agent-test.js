@@ -15,6 +15,11 @@ let MetricStub = {
 }
 
 let single = Object.assign({}, agentFixtures.single)
+
+let  connectedArgs = {
+  where: { connected: true }
+}
+
 let id = 1
 let uuid = 'yyy-yyy-yyy'
 let AgentStub = null
@@ -50,6 +55,10 @@ test.beforeEach(async () => {
   AgentStub.update = sandbox.stub()
   AgentStub.update.withArgs(single, uuidArgs).returns(Promise.resolve(single))
 
+  //Model findAll Stub
+  AgentStub.findAll = sandbox.stub()
+  AgentStub.findAll.withArgs().returns(Promise.resolve(agentFixtures.all))
+  AgentStub.findAll.withArgs(connectedArgs).returns(Promise.resolve(agentFixtures.connected))
 
   const setupDatabase = proxyquire('../', {
     './models/agent': () => AgentStub,
@@ -92,4 +101,15 @@ test.serial('Agent#createOrUpdate - exist', async t => {
   t.true(AgentStub.update.calledOnce, 'Update should be called once')
 
   t.deepEqual(agent, single, 'agent should be the same')
+})
+
+test.serial('Agent#findConnected', async t => {
+  let agent = await db.Agent.findConnected()
+
+  t.true(AgentStub.findAll.called, 'findAll should be called on model')
+  t.true(AgentStub.findAll.calledOnce, 'findAll should be called once')
+  t.true(AgentStub.findAll.calledWith(connectedArgs), 'findAll should be called with connectedArgs')
+
+  t.is(agent.length, agentFixtures.connected.length, 'agents should be the same amount')
+  t.deepEqual(agent, agentFixtures.connected, 'agent should be the same')
 })
