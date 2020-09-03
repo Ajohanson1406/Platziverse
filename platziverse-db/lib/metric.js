@@ -1,13 +1,26 @@
-'use strict'
+'uses stric'
 
 module.exports = function setupMetric (MetricModel, AgentModel) {
+  async function create (uuid, metric) {
+    const agent = await AgentModel.findOne({
+      where: {
+        uuid
+      }
+    })
+    if (agent) {
+      Object.assign(metric, {agentId: agent.id})
+      const result = await MetricModel.create(metric)
+      return result.toJSON()
+    }
+  }
+
   async function findByAgentUuid (uuid) {
     return MetricModel.findAll({
       attributes: ['type'],
       group: ['type'],
       include: [{
-        attributes: [],
         model: AgentModel,
+        attributes: [],
         where: {
           uuid
         }
@@ -24,28 +37,15 @@ module.exports = function setupMetric (MetricModel, AgentModel) {
       },
       limit: 20,
       order: [['createdAt', 'DESC']],
-      include: [{
-        attributes: [],
+      include: {
         model: AgentModel,
+        attributes: [],
         where: {
           uuid
         }
-      }],
+      },
       raw: true
     })
-  }
-  async function create (uuid, metric) {
-    const agent = await AgentModel.findOne({
-      where: {
-        uuid
-      }
-    })
-
-    if (agent) {
-      Object.assign(metric, { agentId: agent.id })
-      const result = await MetricModel.create(metric)
-      return result.toJSON()
-    }
   }
 
   return {
