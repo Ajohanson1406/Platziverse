@@ -5,19 +5,22 @@ const inquirer = require('inquirer')
 const chalk = require('chalk')
 const db = require('./index')
 
-const prompt = inquirer.createPromptModule()
-
 async function setup () {
-  const answer = await prompt([
-    {
-      type: 'confirm',
-      name: 'setup',
-      message: 'This will destroy your databse, are you sure'
-    }
-  ])
+  const allow = process.argv.indexOf('yes') !== -1
 
-  if (!answer.setup) {
-    return console.log('Nothing happened :)')
+  if(!allow) {
+    const prompt = inquirer.createPromptModule()
+    const answer = await prompt([
+      {
+        type: 'confirm',
+        name: 'setup',
+        message: 'This will destroy your databse, are you sure'
+      }
+    ])
+  
+    if (!answer.setup) {
+      return console.log('Nothing happened :)')
+    }
   }
 
   const config = {

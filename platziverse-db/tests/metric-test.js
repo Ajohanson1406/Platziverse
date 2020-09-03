@@ -5,27 +5,27 @@ const test = require('ava')
 const metricFixtures = require('./fixtures/metric')
 const agentFixtures = require('./fixtures/agent')
 
-let uuid = 'yyy-yyy-yyy'
+const uuid = 'yyy-yyy-yyy'
 let MetricStub = null
 let sandbox = null
 let db = null
-let type = 'app'
-let AgentStub = {
+const type = 'app'
+const AgentStub = {
   hasMany: sinon.spy()
 }
-let newMetric = {
+const newMetric = {
   type: 'CPU',
   value: '23%'
 }
-let config = {
+const config = {
   logging: function () {}
 }
-let uuidArgs = {
+const uuidArgs = {
   where: {
     uuid
   }
 }
-let metricUuiArgs = {
+const metricUuiArgs = {
   attributes: ['type'],
   group: ['type'],
   include: [{
@@ -37,7 +37,7 @@ let metricUuiArgs = {
   }],
   raw: true
 }
-let typeUuidArgs = {
+const typeUuidArgs = {
   attributes: ['id', 'type', 'value', 'createdAt'],
   where: {
     type
@@ -105,7 +105,7 @@ test.serial('setup', t => {
 })
 
 test.serial('Metric#create', async t => {
-  let metric = await db.Metric.create(uuid, newMetric)
+  const metric = await db.Metric.create(uuid, newMetric)
 
   t.true(MetricStub.create.called, 'create should be called at model')
   t.true(MetricStub.create.calledOnce, 'create Should be called Once')
@@ -115,7 +115,7 @@ test.serial('Metric#create', async t => {
 })
 
 test.serial('Metric#findByAgentUuid', async t => {
-  let metrics = await db.Metric.findByAgentUuid(uuid)
+  const metrics = await db.Metric.findByAgentUuid(uuid)
 
   t.true(MetricStub.findAll.called, 'findAll should be called')
   t.true(MetricStub.findAll.calledOnce, 'findAll should be called Once')
@@ -126,7 +126,7 @@ test.serial('Metric#findByAgentUuid', async t => {
 })
 
 test.serial('Metric#findByTypeAgentUuid', async t => {
-  let metrics = await db.Metric.findByTypeAgentUuid(type, uuid)
+  const metrics = await db.Metric.findByTypeAgentUuid(type, uuid)
 
   t.true(MetricStub.findAll.called, 'findAll should be called')
   t.true(MetricStub.findAll.calledOnce, 'findAll should be called Once')
