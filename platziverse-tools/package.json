@@ -1,0 +1,23 @@
+{
+  "name": "platziverse-tools",
+  "version": "1.0.0",
+  "description": "A Simple IoT Plataform platziverse-tools",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Ajohanson1406/Platziverse.git"
+  },
+  "author": "Albert Johanson",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Ajohanson1406/Platziverse/issues"
+  },
+  "homepage": "https://github.com/Ajohanson1406/Platziverse#readme",
+  "devDependencies": {
+    "chalk": "^4.1.0",
+    "dotenv": "^8.2.0"
+  }
+}
