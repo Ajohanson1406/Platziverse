@@ -5,8 +5,7 @@
   "description": "A Simple IoT Plataform - MQTT Server",
   "main": "server.js",
   "scripts": {
-    "start": "set NODE_ENV=production node server.js",
-    "start-dev": "set DEBUG=platziverse:* nodemon server.js",
+    "start-dev": "SET DEBUG=platziverse:* && nodemon server.js",
     "lint": "standard --fix"
   },
   "repository": {
@@ -28,8 +27,6 @@
     "aedes-persistence-redis": "^7.0.0",
     "chalk": "^4.1.0",
     "debug": "^4.1.1",
-    "platziverse-db": "file:../platziverse-db",
-    "platziverse-tools": "file:../platziverse-tools",
     "redis": "^3.0.2"
   }
 }
