@@ -4,8 +4,8 @@ const net = require('net')
 const debug = require('debug')('platziverse:mqtt')
 const chalk = require('chalk')
 
-const database = require('../platziverse-db')
-const { utils: { parsePayload, handleFatalError, handleError }, config } = require('../platziverse-tools')
+const database = require('platziverse-db')
+const { utils: { parsePayload, handleFatalError, handleError }, config } = require('platziverse-tools')
 
 // Aedes is a barebone MQTT server that can run on any stream servers
 // See https://github.com/moscajs/aedes
@@ -65,7 +65,6 @@ aedes.on('client', (client) => {
   debug(`[Client connected]: ${client.id}`)
 })
 
-
 aedes.on('publish', async (packet, client) => {
   debug(`[Received]: ${packet.topic}`)
 
@@ -97,16 +96,74 @@ aedes.on('publish', async (packet, client) => {
           topic: 'agent/connected',
           payload: JSON.stringify({
             agent: {
-                uuid: agent.uuid,
-                name: agent.name,
-                hostname: agent.hostname,
-                pid: agent.pid,
-                connected: agent.connected
-              }
+              uuid: agent.uuid,
+              name: agent.name,
+              hostname: agent.hostname,
+              pid: agent.pid,
+              connected: agent.connected
+            }
           })
         })
       }
-      
+
+      // Here the logic to store metrics
+      // With map we try to save the metrics parallelly.
+      // `map` accepts a sync callback so it returns an array of promises
+      // then wait until all the promises are solved and store them into
+      // `resolvedPromises` array. At the end log all the ids of each metric
+      // saved and it associate agent
+
+      try {
+        const promises = payload.metrics.map(async (metric) => {
+          const createMetric = await Metric.create(agent.uuid, metric)
+          return createMetric
+        })
+
+        const resolvedPromises = await Promise.all(promises)
+
+        resolvedPromises.forEach((metric) => {
+          debug(
+            `[saved-metric]: Metric ${metric.id} saved with Agent ${agent.uuid}`
+          )
+        })
+      } catch (error) {
+        handleError(error)
+      }
     }
+  } else {
+    debug(`[Payload]: ${packet.payload}`)
+  }
+})
+
+aedes.on('clientDisconnect', async (client) => {
+  debug(`[Client Disconnected]: ${client.id}`)
+
+  // Try to find the client in the clients connected list
+
+  const agent = clients.get(client.id)
+
+  if (agent) {
+    try {
+      await Agent.createOrUpdate({ ...agent, connected: false })
+    } catch (error) {
+      handleError(error)
+    }
+
+    // Delete agent from the clients connected list
+
+    clients.delete(client.id)
+
+    aedes.publish({
+      topic: 'agent/disconnected',
+      payload: JSON.stringify({
+        agent: {
+          uuid: agent.uuid
+        }
+      })
+    })
+
+    debug(
+       `[Report]: Client ${client.id} associated to Agent ${agent.uuid} marked as disconnected`
+    )
   }
 })
