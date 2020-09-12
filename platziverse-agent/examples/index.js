@@ -1,13 +1,8 @@
-# platziverse-agent
-
-## Usage
-
-``` js
-const PlatziverseAgent = require('platziverse-agent')
+const PlatziverseAgent = require('../index')
 
 const agent = new PlatziverseAgent({
     name: 'myapp',
-    username: 'admin'
+    username: 'admin',
     interval: 2000
 })
 
@@ -41,5 +36,4 @@ function handler(payload) {
     console.log(payload)
 }
 
-setTimeout(() => agent.disconnect(, 20000))
-```
+setTimeout(() => agent.disconnect(),2000)

@@ -21,6 +21,9 @@
   "dependencies": {
     "debug": "^4.1.1",
     "defaults": "^1.0.3",
-    "mqtt": "^4.2.1"
+    "mqtt": "^4.2.1",
+    "platziverse-db": "file:../platziverse-db",
+    "platziverse-tools": "file:../platziverse-tools",
+    "uuid": "^8.3.0"
   }
 }
