@@ -1,0 +1,22 @@
+{
+  "name": "platziverse-errorhandler",
+  "version": "1.0.0",
+  "description": "A Module to control the error with express",
+  "main": "index.js",
+  "scripts": {
+    "lint": "standard --fix" 
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Ajohanson1406/Platziverse.git"
+  },
+  "author": "Albert Johanson",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Ajohanson1406/Platziverse/issues"
+  },
+  "homepage": "https://github.com/Ajohanson1406/Platziverse#readme",
+  "dependencies": {
+    "standard": "^14.3.4"
+  }
+}
