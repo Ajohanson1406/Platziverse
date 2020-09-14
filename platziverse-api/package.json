@@ -1,0 +1,31 @@
+{
+  "name": "platziverse-api",
+  "version": "1.0.0",
+  "private": true,
+  "description": "A IoT plataform platziverse-api",
+  "main": "server.js",
+  "scripts": {
+    "start": "set NODE_ENV=production node server.js",
+    "lint": "standard --fix",
+    "start-dev": "set DEBUG=platziverse:* & nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Ajohanson1406/Platziverse.git"
+  },
+  "author": "Albert Johanson",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Ajohanson1406/Platziverse/issues"
+  },
+  "homepage": "https://github.com/Ajohanson1406/Platziverse#readme",
+  "dependencies": {
+    "chalk": "^4.1.0",
+    "debug": "^4.1.1",
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4",
+    "standard": "^14.3.4"
+  }
+}
