@@ -6,7 +6,6 @@ const asyncify = require('express-asyncify')
 const db = require('platziverse-db')
 
 const { config } = require('platziverse-tools')
-const { agent } = require('supertest')
 
 const api = asyncify(express.Router())
 
@@ -26,15 +25,14 @@ api.use('*', async (req, res, next) => {
   next()
 })
 
-api.get('/agents', async(req, res, next) => {
- let agents = []
+api.get('/agents', async (req, res, next) => {
+  let agents = []
 
- try {
-   agents = await Agent.findConnected()
- } catch (e) {
-   return next(e)
-   
- }
+  try {
+    agents = await Agent.findConnected()
+  } catch (e) {
+    return next(e)
+  }
   res.send(agents)
 })
 
@@ -56,26 +54,26 @@ api.get('/agent/:uuid', async (req, res, next) => {
   res.send(agent)
 })
 
-api.get('/metrics/:uuid', async(req, res, next) => {
+api.get('/metrics/:uuid', async (req, res, next) => {
   const { uuid } = req.params
 
-  debug(`Request to /metric/${uuid}`)
+  debug(`Request to /metrics/${uuid}`)
 
   let metric = []
 
   try {
-    metric = await Metric.findByUuid(uuid)
+    metric = await Metric.findByAgentUuid(uuid)
   } catch (e) {
     return next(e)
   }
 
-  if(!metric || metric.length === 0) {
+  if (!metric || metric.length === 0) {
     return next(new Error(`Metrics not found to the agent with uuid ${uuid}`))
   }
-  res.send({ uuid })
+  res.send(metric)
 })
 
-api.get('/metrics/:uuid/:type', async(req, res, next) => {
+api.get('/metrics/:uuid/:type', async (req, res, next) => {
   const { uuid, type } = req.params
 
   debug(`Request to /metrics/${uuid}/${type}`)
@@ -87,10 +85,10 @@ api.get('/metrics/:uuid/:type', async(req, res, next) => {
   } catch (e) {
     return next(e)
   }
-  if(!metric || metric.length === 0) {
+  if (!metrics || metrics.length === 0) {
     return next(new Error(`Metrics not found to the agent with uuid ${uuid} and type ${type}`))
   }
-  res.send({ uuid, type })
+  res.send(metrics)
 })
 
 module.exports = api
