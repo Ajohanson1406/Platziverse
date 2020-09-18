@@ -8,7 +8,7 @@ const db = require('./index')
 async function setup () {
   const allow = process.argv.indexOf('yes') !== -1
 
-  if(!allow) {
+  if (!allow) {
     const prompt = inquirer.createPromptModule()
     const answer = await prompt([
       {
@@ -17,7 +17,7 @@ async function setup () {
         message: 'This will destroy your databse, are you sure'
       }
     ])
-  
+
     if (!answer.setup) {
       return console.log('Nothing happened :)')
     }
