@@ -1,13 +1,15 @@
 'use strict'
 
 require('dotenv').config()
+const debug = require('debug')('platziverse:tools')
 
 const config = {
     dev: process.env.NODE_ENV !== 'production',
     apiPort: process.env.API_PORT || 3001,
     clientPort: process.env.CLIENT_PORT || 8080,
     auth: {
-        secret: process.env.SECRET
+        secret: process.env.SECRET || 'platzi',
+        algorithms: ['HS256']
     },
 
     db: {
