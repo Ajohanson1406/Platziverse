@@ -1,0 +1,34 @@
+{
+  "name": "platziverse-web",
+  "version": "1.0.0",
+  "private": true,
+  "description": "A Iot Platform with node Platziverse-Web",
+  "main": "server.js",
+  "scripts": {
+    "lint": "standard --fix",
+    "dev": "set NODE_ENV=production && node server.js",
+    "start-dev": "set DEBUG=platziverse:* && nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Ajohanson1406/Platziverse.git"
+  },
+  "author": "Albert Johanson",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Ajohanson1406/Platziverse/issues"
+  },
+  "homepage": "https://github.com/Ajohanson1406/Platziverse#readme",
+  "devDependencies": {
+    "nodemon": "^2.0.4",
+    "standard": "^14.3.4"
+  },
+  "dependencies": {
+    "chalk": "^4.1.0",
+    "debug": "^4.2.0",
+    "express": "^4.17.1",
+    "platziverse-tools": "file:../platziverse-tools",
+    "platziverse-agent": "file:../platziverse-agent",
+    "socket.io": "^2.3.0"
+  }
+}
