@@ -71,8 +71,8 @@ module.exports = {
         const labels = []
         const data = []
 
-        if(Array.isArray(results)){
-          results.forEach(m => {
+        if(Array.isArray(result)){
+          result.forEach(m => {
             labels.push(moment(m.createdAt).format('HH:mm:ss'))
             data.push(m.value)
           })
@@ -93,7 +93,7 @@ module.exports = {
      startRealtime() {
         const { type, uuid, socket } = this
 
-        socket.on('agent/message', payload => {
+        socket.on('agent/message', (payload) => {
           if(payload.agent.uuid === uuid) {
             const metric = payload.metrics.find(m => m.type === type)
 
