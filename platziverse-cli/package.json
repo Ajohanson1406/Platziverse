@@ -1,0 +1,31 @@
+{
+  "name": "platziverse-cli",
+  "version": "1.0.0",
+  "description": "A simple IoT Platform platziverse-CLI",
+  "bin": "platziverse.js",
+  "scripts": {
+    "lint": "standard --fix"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Ajohanson1406/Platziverse.git"
+  },
+  "author": "Albert Johanson",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Ajohanson1406/Platziverse/issues"
+  },
+  "homepage": "https://github.com/Ajohanson1406/Platziverse#readme",
+  "devDependencies": {
+    "lint": "^0.7.0",
+    "standard": "^14.3.4"
+  },
+  "dependencies": {
+    "args": "^5.0.1",
+    "blessed": "^0.1.81",
+    "blessed-contrib": "^4.8.20",
+    "minimist": "^1.2.5",
+    "moment": "^2.29.0",
+    "platziverse-agent": "file:../platziverse-agent"
+  }
+}
