@@ -22,6 +22,7 @@
 
 const request = require('request-promise-native')
 const io = require('socket.io-client')
+const { config } = require('platziverse-tools')
 
 const socket = io()
 
@@ -43,7 +44,7 @@ module.exports = {
 
          const options = {
           method: 'GET',
-          url: `http://localhost:8080/agents`,
+          url: `${config.proxy.serverHost}/agents`,
           json: true
         }
 
@@ -58,7 +59,7 @@ module.exports = {
 
         this.agents = result
 
-        sokcet.on('agent/connected' , (payload) => {
+        socket.on('agent/connected' , (payload) => {
 
           const { uuid } = payload.agent
 

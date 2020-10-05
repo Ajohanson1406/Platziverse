@@ -5,6 +5,7 @@
   "description": "A Simple IoT Plataform - MQTT Server",
   "main": "server.js",
   "scripts": {
+    "start": "set NODE_ENV=production node server.js",
     "start-dev": "SET DEBUG=platziverse:* && nodemon server.js",
     "lint": "standard --fix"
   },

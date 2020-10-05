@@ -27,7 +27,7 @@ api.use('*', async (req, res, next) => {
   next()
 })
 
-api.get('/agents', auth(config.auth), async (req, res, next) => {
+api.get('/agents',  async (req, res, next) => {
   const { user } = req
 
   if (!user || !user.username) {
@@ -48,7 +48,7 @@ api.get('/agents', auth(config.auth), async (req, res, next) => {
   res.send(agents)
 })
 
-api.get('/agent/:uuid', auth(config.auth), async (req, res, next) => {
+api.get('/agent/:uuid',  async (req, res, next) => {
   const { uuid } = req.params
   const { user } = req
 
@@ -95,7 +95,7 @@ api.get('/metrics/:uuid', auth(config.auth), guards.check(['metrics: read']), as
   res.send(metric)
 })
 
-api.get('/metrics/:uuid/:type', auth(config.auth), async (req, res, next) => {
+api.get('/metrics/:uuid/:type',  async (req, res, next) => {
   const { uuid, type } = req.params
 
   debug(`Request to /metrics/${uuid}/${type}`)

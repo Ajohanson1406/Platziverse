@@ -76,6 +76,7 @@
 <script>
 
 const request = require('request-promise-native')
+const { config } = require('platziverse-tools')
 
 module.exports = {
   props: [ 'uuid' ],
@@ -102,7 +103,7 @@ module.exports = {
 
      const options = {
           method: 'GET',
-          url: `http://localhost:8080/agent/${uuid}`,
+          url: `${config.proxy.serverHost}/agent/${uuid}`,
           json: true
         }
 
@@ -129,7 +130,7 @@ module.exports = {
 
       const options = {
           method: 'GET',
-          url: `http://localhost:8080/metrics/${uuid}`,
+          url: `${config.proxy.serverHost}/metrics/${uuid}`,
           json: true
         }
 

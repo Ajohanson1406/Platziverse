@@ -7,9 +7,10 @@
   "scripts": {
     "start": "NODE_ENV=production node server.js",
     "prestart": "npm run build",
+    "build": "set NODE_ENV=production browserify -g envify -t babelify -t vueify client/app.js | uglifyjs -c -m -o public/bundle.js",
     "start-dev": "set DEBUG=platziverse:* && nodemon server.js",
-    "prestart-dev": "npm run build",
-    "build": "browserify -t babelify -t vueify client/app.js -o public/bundle.js",
+    "prestart-dev": "npm run build-dev",
+    "build-dev": "browserify -g envify -t babelify -t vueify client/app.js -o public/bundle.js",
     "lint": "standard --fix"
   },
   "repository": {
@@ -27,10 +28,12 @@
     "@babel/plugin-transform-runtime": "^7.11.5",
     "@babel/preset-env": "^7.11.5",
     "@babel/preset-es2015": "^7.0.0-beta.53",
-    "babelify": "^10.0.0",
+    "babelify": "^8.0.0",
     "browserify": "^16.5.2",
+    "envify": "^4.1.0",
     "nodemon": "^2.0.4",
     "standard": "^14.3.4",
+    "uglify-js": "^3.11.0",
     "vueify": "^9.4.1"
   },
   "dependencies": {

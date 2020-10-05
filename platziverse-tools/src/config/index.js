@@ -20,6 +20,12 @@ const config = {
     port: process.env.DB_PORT,
     dialect: 'postgres',
     logging: s => debug(s)
+    },
+
+    proxy: {
+        endpoint: process.env.API_ENDPOINT || 'http://localhost:3000',
+        serverHost: process.env.SERVER_HOST || 'http://localhost:8080',
+        apiToken: process.env.API_TOKEN || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InBsYXR6aSIsImFkbWluIjp0cnVlLCJwZXJtaXNzaW9ucyI6WyJtZXRyaWNzOnJlYWQiXSwiaWF0IjoxNjAwNzI1MTk0fQ.BHW184DJ2_EvHgAxistOdHsxY2r09oC3K7uw5qln9hE'
     }
 }
 
